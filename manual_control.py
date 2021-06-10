@@ -102,7 +102,7 @@ args = parser.parse_args()
 env = gym.make(args.env)
 
 if args.agent_view:
-    env = RGBImgPartialObsWrapper(env)
+    env = RGBImgPartialObsWrapper(env, tile_size=args.tile_size)
     env = ImgObsWrapper(env)
 
 window = Window('gym_minigrid - ' + args.env)
