@@ -63,7 +63,6 @@ class GoToObjectEnv(MiniGridEnv):
 
         descStr = '%s %s' % (self.target_color, self.targetType)
         self.mission = 'go to the %s' % descStr
-        #print(self.mission)
 
     def step(self, action):
         obs, reward, done, info = MiniGridEnv.step(self, action)
