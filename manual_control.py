@@ -7,11 +7,14 @@ import gym
 import gym_minigrid
 from gym_minigrid.wrappers import *
 from gym_minigrid.window import Window
+from gym_minigrid.minigrid_options import IsObjectRight
 
-def redraw(img):
+def redraw(obs):
+    img = obs['image'] if isinstance(obs, dict) else obs
     if not args.agent_view:
         img = env.render('rgb_array', tile_size=args.tile_size)
-
+    else:
+        img = env.get_obs_render(img, tile_size=args.tile_size)
     window.show_img(img)
 
 def reset():
@@ -100,11 +103,6 @@ parser.add_argument(
 args = parser.parse_args()
 
 env = gym.make(args.env)
-
-if args.agent_view:
-    env = RGBImgPartialObsWrapper(env, tile_size=args.tile_size)
-    env = ImgObsWrapper(env)
-
 window = Window('gym_minigrid - ' + args.env)
 window.reg_key_handler(key_handler)
 
