@@ -19,6 +19,9 @@ def fill_coords(img, fn, color):
     """
     Fill pixels of an image with coordinates matching a filter function
     """
+    if img.shape[2] > 3:
+        alpha = 255 if np.any(color != 0) else 0
+        color = np.concatenate((color, [alpha]))
 
     for y in range(img.shape[0]):
         for x in range(img.shape[1]):
@@ -26,7 +29,6 @@ def fill_coords(img, fn, color):
             xf = (x + 0.5) / img.shape[1]
             if fn(xf, yf):
                 img[y, x] = color
-
     return img
 
 def rotate_fn(fin, cx, cy, theta):

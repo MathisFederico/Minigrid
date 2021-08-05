@@ -127,25 +127,22 @@ class WorldObj:
         is_locked = state == 2
 
         if obj_type == 'wall':
-            v = Wall(color)
-        elif obj_type == 'floor':
-            v = Floor(color)
-        elif obj_type == 'ball':
-            v = Ball(color)
-        elif obj_type == 'key':
-            v = Key(color)
-        elif obj_type == 'box':
-            v = Box(color)
-        elif obj_type == 'door':
-            v = Door(color, is_open, is_locked)
-        elif obj_type == 'goal':
-            v = Goal()
-        elif obj_type == 'lava':
-            v = Lava()
-        else:
-            assert False, "unknown object type in decode '%s'" % obj_type
-
-        return v
+            return Wall(color)
+        if obj_type == 'floor':
+            return Floor(color)
+        if obj_type == 'ball':
+            return Ball(color)
+        if obj_type == 'key':
+            return Key(color)
+        if obj_type == 'box':
+            return Box(color)
+        if obj_type == 'door':
+            return Door(color, is_open, is_locked)
+        if obj_type == 'goal':
+            return Goal()
+        if obj_type == 'lava':
+            return Lava()
+        raise ValueError(f"Unknown object type in decode: {obj_type}")
 
     def render(self, r):
         """Draw this object with the given renderer"""
@@ -576,6 +573,7 @@ class Grid:
 
         return grid, vis_mask
 
+    @staticmethod
     def process_vis(grid, agent_pos):
         mask = np.zeros(shape=(grid.width, grid.height), dtype=np.bool)
 
