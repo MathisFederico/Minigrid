@@ -811,7 +811,7 @@ class MiniGridEnv(gym.Env):
         Generate random integer in [low,high[
         """
 
-        return self.np_random.randint(low, high)
+        return self.np_random.integers(low, high)
 
     def _rand_float(self, low, high):
         """
@@ -825,7 +825,7 @@ class MiniGridEnv(gym.Env):
         Generate random boolean value
         """
 
-        return self.np_random.randint(0, 2) == 0
+        return self.np_random.integers(0, 2) == 0
 
     def _rand_elem(self, iterable):
         """
