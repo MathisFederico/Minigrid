@@ -7,3 +7,5 @@ trained_models
 build/*
 dist/*
 .idea/
+
+venv
