@@ -1,0 +1,4 @@
+gym
+numpy
+matplolib
+git+https://github.com/IRLL/HEB_graphs.git#egg=option_graph
