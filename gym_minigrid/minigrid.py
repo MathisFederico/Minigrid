@@ -666,7 +666,13 @@ class MiniGridEnv(gym.Env):
             shape=(self.agent_view_size, self.agent_view_size, 3),
             dtype="uint8",
         )
-        self.observation_space = spaces.Dict({"image": self.observation_space})
+        self.observation_space = spaces.Dict(
+            {
+                "image": self.observation_space,
+                "direction": spaces.Discrete(4),
+                "mission": spaces.Text(50),
+            }
+        )
 
         # Range of possible rewards
         self.reward_range = (0, 1)
@@ -1153,8 +1159,7 @@ class MiniGridEnv(gym.Env):
         # Note that this incurs some performance cost
         if not self.see_through_walls:
             vis_mask = grid.process_vis(
-                grid,
-                agent_pos=(self.agent_view_size // 2, self.agent_view_size - 1)
+                grid, agent_pos=(self.agent_view_size // 2, self.agent_view_size - 1)
             )
         else:
             vis_mask = np.ones(shape=(grid.width, grid.height), dtype=np.bool)
